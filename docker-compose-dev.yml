@@ -457,7 +457,6 @@ services:
       - LELYLAN_NODES_PUBLIC_URL=nodes.xangnam.com
   devices-dashboard:
     image: lelylanlab/devices-dashboard-ng:latest
-    restart: always
     container_name: devices-dashboard
     expose:
       - 80
