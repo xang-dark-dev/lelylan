@@ -449,7 +449,7 @@ services:
       - NODE_ENV=development
       - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
       - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
-      - LELYLAN_CLIENT_ID="3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709"
+      - LELYLAN_CLIENT_ID=""
       - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
       - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
       - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
@@ -475,7 +475,7 @@ services:
       - NODE_ENV=development
       - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
       - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
-      - LELYLAN_CLIENT_ID="3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709"
+      - LELYLAN_CLIENT_ID=""
       - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
       - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
       - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
