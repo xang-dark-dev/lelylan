@@ -126,11 +126,6 @@ services:
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
-      - LELYLAN_TYPES_URL=types
-      - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
-      - LELYLAN_PROFILES_URL=profiles
       - MONGOLAB_PEOPLE_URL=mongodb://mongodb:27017/people
       - MONGOLAB_DEVICES_URL=mongodb://mongodb:27017/devices
       - MONGOLAB_TYPES_URL=mongodb://mongodb:27017/types
@@ -143,11 +138,6 @@ services:
       - MEMCACHIER_USERNAME=hex
       - MEMCACHIER_PASSWORD=ilovedocker555
     links:
-      - "people:people"
-      - "devices:devices"
-      - "types:types"
-      - "subscriptions:subscriptions"
-      - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
       - "memcached:memcached"
@@ -175,11 +165,6 @@ services:
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
-      - LELYLAN_TYPES_URL=types
-      - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
-      - LELYLAN_PROFILES_URL=profiles
       - MONGOLAB_PEOPLE_URL=mongodb://mongodb:27017/people
       - MONGOLAB_DEVICES_URL=mongodb://mongodb:27017/devices
       - MONGOLAB_TYPES_URL=mongodb://mongodb:27017/types
@@ -192,11 +177,6 @@ services:
       - MEMCACHIER_USERNAME=hex
       - MEMCACHIER_PASSWORD=ilovedocker555
     links:
-      - "people:people"
-      - "devices:devices"
-      - "types:types"
-      - "subscriptions:subscriptions"
-      - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
       - "memcached:memcached"
@@ -262,11 +242,6 @@ services:
       - RAILS_ENV=development
       - DEBUG=lelylan
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
-      - LELYLAN_TYPES_URL=types
-      - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
-      - LELYLAN_PROFILES_URL=profiles
       - MONGOLAB_PEOPLE_URL=mongodb://mongodb:27017/people
       - MONGOLAB_DEVICES_URL=mongodb://mongodb:27017/devices
       - MONGOLAB_TYPES_URL=mongodb://mongodb:27017/types
@@ -279,11 +254,6 @@ services:
       - MEMCACHIER_USERNAME=hex
       - MEMCACHIER_PASSWORD=ilovedocker555
     links:
-      - "people:people"
-      - "devices:devices"
-      - "types:types"
-      - "subscriptions:subscriptions"
-      - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
       - "memcached:memcached"
@@ -344,8 +314,6 @@ services:
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
       - LELYLAN_TYPES_URL=types
       - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
       - LELYLAN_PROFILES_URL=profiles
@@ -381,11 +349,6 @@ services:
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
-      - LELYLAN_TYPES_URL=types
-      - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
-      - LELYLAN_PROFILES_URL=profiles
       - MONGOLAB_PEOPLE_URL=mongodb://mongodb:27017/people
       - MONGOLAB_DEVICES_URL=mongodb://mongodb:27017/devices
       - MONGOLAB_TYPES_URL=mongodb://mongodb:27017/types
@@ -416,11 +379,6 @@ services:
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
-      - LELYLAN_TYPES_URL=types
-      - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
-      - LELYLAN_PROFILES_URL=profiles
       - MONGOLAB_PEOPLE_URL=mongodb://mongodb:27017/people
       - MONGOLAB_DEVICES_URL=mongodb://mongodb:27017/devices
       - MONGOLAB_TYPES_URL=mongodb://mongodb:27017/types
@@ -434,11 +392,6 @@ services:
       - MEMCACHIER_PASSWORD=ilovedocker555
       - DEBUG=true
     links:
-      - "people:people"
-      - "devices:devices"
-      - "types:types"
-      - "subscriptions:subscriptions"
-      - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
       - "memcached:memcached"
@@ -460,11 +413,6 @@ services:
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_PEOPLE_URL=people
-      - LELYLAN_DEVICES_URL=devices
-      - LELYLAN_TYPES_URL=types
-      - LELYLAN_SUBSCRIPTIONS_URL=subscriptions
-      - LELYLAN_PROFILES_URL=profiles
       - MONGOLAB_PEOPLE_URL=mongodb://mongodb:27017/people
       - MONGOLAB_DEVICES_URL=mongodb://mongodb:27017/devices
       - MONGOLAB_TYPES_URL=mongodb://mongodb:27017/types
@@ -477,11 +425,6 @@ services:
       - MEMCACHIER_USERNAME=hex
       - MEMCACHIER_PASSWORD=ilovedocker555
     links:
-      - "people:people"
-      - "devices:devices"
-      - "types:types"
-      - "subscriptions:subscriptions"
-      - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
       - "memcached:memcached"
@@ -506,7 +449,7 @@ services:
       - NODE_ENV=development
       - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
       - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
-      - LELYLAN_CLIENT_ID=""
+      - LELYLAN_CLIENT_ID="3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709"
       - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
       - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
       - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
@@ -532,7 +475,7 @@ services:
       - NODE_ENV=development
       - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
       - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
-      - LELYLAN_CLIENT_ID="55765567"
+      - LELYLAN_CLIENT_ID="3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709"
       - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
       - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
       - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
@@ -554,7 +497,8 @@ services:
       - NODE_ENV=development
       - LELYLAN_PEOPLE_URL=people
       - LELYLAN_PEOPLE_PORT=80
-
+    links:
+      - "people:people"
   mongodb:
     image: mongo:2.6
     restart: always
