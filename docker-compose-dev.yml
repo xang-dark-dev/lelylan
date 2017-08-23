@@ -102,7 +102,6 @@ services:
       - MEMCACHIER_PASSWORD=ilovedocker555
     links:
       - "people:people"
-      - "devices:devices"
       - "types:types"
       - "subscriptions:subscriptions"
       - "profiles:profiles"
@@ -241,7 +240,6 @@ services:
       - LELYLAN_DEV_URL=dev-center.xangnam.com
       - LELYLAN_DEV_PORT=80
     links:
-      - "people:people"
       - "devices:devices"
       - "types:types"
       - "subscriptions:subscriptions"
@@ -329,7 +327,6 @@ services:
       - "devices:devices"
       - "types:types"
       - "subscriptions:subscriptions"
-      - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
       - "memcached:memcached"
@@ -370,7 +367,6 @@ services:
       - "people:people"
       - "devices:devices"
       - "types:types"
-      - "subscriptions:subscriptions"
       - "profiles:profiles"
       - "mongodb:mongodb"
       - "redis:redis"
@@ -410,7 +406,6 @@ services:
     links:
       - "people:people"
       - "devices:devices"
-      - "types:types"
       - "subscriptions:subscriptions"
       - "profiles:profiles"
       - "mongodb:mongodb"
