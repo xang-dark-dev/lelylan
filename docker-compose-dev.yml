@@ -2,9 +2,10 @@ version: '2'
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
+    container_name: nginx-proxy
     environment:
-      - DEFAULT_HOST=api-proxy
-      - VIRTUAL_HOST=nginx
+      - DEFAULT_HOST=api-proxy.xangnam.com
+      - VIRTUAL_HOST=nginx.xangnam.com
     ports:
       - "80:80"
     volumes:
@@ -12,6 +13,7 @@ services:
   api-proxy:
     image: lelylanlab/api-proxy:latest
     restart: always
+    container_name: api-proxy
     expose:
       - 8000
     depends_on:
@@ -24,7 +26,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=api-proxy
+      - VIRTUAL_HOST=api-proxy.xangnam.com
       - VIRTUAL_PORT=8000
       - PORT=8000
       - DEBUG=lelylan
@@ -45,17 +47,27 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
       - LELYLAN_PEOPLE_PORT=80
       - LELYLAN_DEVICES_PORT=80
       - LELYLAN_TYPES_PORT=80
       - LELYLAN_SUBSCRIPTIONS_PORT=80
       - LELYLAN_PROFILES_PORT=80
-      - LELYLAN_PROXY_URL=api-proxy
+      - LELYLAN_PROXY_URL=api-proxy.xangnam.com
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   devices:
     image: lelylanlab/devices:latest
     restart: always
+    container_name: devices
     expose:
       - 80
     depends_on:
@@ -67,7 +79,7 @@ services:
       - subscriptions
       - profiles
     environment:
-      - VIRTUAL_HOST=devices
+      - VIRTUAL_HOST=devices.xangnam.com
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -86,11 +98,21 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   mqtt:
     image: lelylanlab/mqtt:latest
     restart: always
+    container_name: mqtt
     expose:
       - 80
     depends_on:
@@ -98,7 +120,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=mqtt
+      - VIRTUAL_HOST=mqtt.xangnam.com
       - REDIS_HOST=redis
       - DEBUG=lelylan
       - NODE_PORT=1883
@@ -119,11 +141,21 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   nodes:
     image: lelylanlab/nodes:latest
     restart: always
+    container_name: nodes
     expose:
       - 8000
     depends_on:
@@ -133,13 +165,13 @@ services:
       - api-proxy
       - mqtt
     environment:
-      - VIRTUAL_HOST=nodes
+      - VIRTUAL_HOST=nodes.xangnam.com
       - VIRTUAL_PORT=8000
       - PORT=8000
       - MOSCA_HOST=mqtt
       - REDIS_HOST=redis
       - LELYLAN_API_URL=http://api-proxy:8000
-      - LELYLAN_API_HOST=api-proxy
+      - LELYLAN_API_HOST=api-proxy.xangnam.com
       - DEBUG=lelylan
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -158,11 +190,23 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
+      - "mqtt:mqtt"
+      - "api-proxy:api-proxy"
   people:
     image: lelylanlab/people:latest
     restart: always
+    container_name: people
     expose:
       - 80
     depends_on:
@@ -173,7 +217,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=people
+      - VIRTUAL_HOST=people.xangnam.com
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -192,13 +236,23 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
-      - LELYLAN_DEV_URL=dev-center
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+      - LELYLAN_DEV_URL=dev-center.xangnam.com
       - LELYLAN_DEV_PORT=80
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   physicals:
     image: lelylanlab/physicals:latest
     restart: always
+    container_name: physicals
     expose:
       - 80
     depends_on:
@@ -206,7 +260,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=physicals
+      - VIRTUAL_HOST=physicals.xangnam.com
       - RACK_ENV=development
       - RAILS_ENV=development
       - DEBUG=lelylan
@@ -225,11 +279,21 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   profiles:
     image: lelylanlab/profiles:latest
     restart: always
+    container_name: profiles
     expose:
       - 80
     depends_on:
@@ -239,7 +303,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=profiles
+      - VIRTUAL_HOST=profiles.xangnam.com
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -258,11 +322,21 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   subscriptions:
     image: lelylanlab/subscriptions:latest
     restart: always
+    container_name: sub
     expose:
       - 80
     depends_on:
@@ -271,7 +345,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=subscriptions
+      - VIRTUAL_HOST=subscriptions.xangnam.com
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -290,11 +364,21 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   types:
     image: lelylanlab/types:latest
     restart: always
+    container_name: types
     expose:
       - 80
     depends_on:
@@ -302,7 +386,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=types
+      - VIRTUAL_HOST=types.xangnam.com
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -321,11 +405,21 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   webhooks:
     image: lelylanlab/webhooks:latest
     restart: always
+    container_name: webhooks
     expose:
       - 80
     depends_on:
@@ -333,7 +427,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=webhooks
+      - VIRTUAL_HOST=webhooks.xangnam.com
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
@@ -351,12 +445,22 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
       - DEBUG=true
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   websockets:
     image: lelylanlab/websockets:latest
     restart: always
+    container_name: websockets
     expose:
       - 8000
     depends_on:
@@ -364,7 +468,7 @@ services:
       - redis
       - memcached
     environment:
-      - VIRTUAL_HOST=websockets
+      - VIRTUAL_HOST=websockets.xangnam.com
       - VIRTUAL_PORT=8000
       - DEBUG=lelylan
       - PORT=8000
@@ -385,13 +489,22 @@ services:
       - REDIS_URL=redis://redis:6379/
       - REDIS_RATE_LIMIT_URL=redis://redis:6379/
       - MEMCACHIER_SERVERS=memcached:11211
-      - MEMCACHIER_USERNAME=user
-      - MEMCACHIER_PASSWORD=password
-
+      - MEMCACHIER_USERNAME=hex
+      - MEMCACHIER_PASSWORD=ilovedocker555
+    links:
+      - "people:people"
+      - "devices:devices"
+      - "types:types"
+      - "subscriptions:subscriptions"
+      - "profiles:profiles"
+      - "mongodb:mongodb"
+      - "redis:redis"
+      - "memcached:memcached"
   #: Development tools
   types-dashboard:
     image: lelylanlab/types-dashboard-ng:latest
     restart: always
+    container_name: type-dashboard
     expose:
       - 80
     depends_on:
@@ -399,24 +512,25 @@ services:
       - people
       - websockets
     environment:
-      - VIRTUAL_HOST=types-dashboard
-      - PUBLIC_HOST=types-dashboard
+      - VIRTUAL_HOST=types-dashboard.xangnam.com
+      - PUBLIC_HOST=types-dashboard.xangnam.com
       - LISTEN_HOST=0.0.0.0
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_API_PUBLIC_URL=api-proxy
-      - LELYLAN_PEOPLE_PUBLIC_URL=people
+      - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
+      - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
       - LELYLAN_CLIENT_ID=""
-      - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard
-      - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard
-      - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets
-      - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center
-      - LELYLAN_NODES_PUBLIC_URL=nodes
+      - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
+      - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
+      - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
+      - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center.xangnam.com
+      - LELYLAN_NODES_PUBLIC_URL=nodes.xangnam.com
   devices-dashboard:
     image: lelylanlab/devices-dashboard-ng:latest
     restart: always
+    container_name: devices-dashboard
     expose:
       - 80
     depends_on:
@@ -424,30 +538,31 @@ services:
       - people
       - websockets
     environment:
-      - VIRTUAL_HOST=devices-dashboard
-      - PUBLIC_HOST=devices-dashboard
+      - VIRTUAL_HOST=devices-dashboard.xangnam.com
+      - PUBLIC_HOST=devices-dashboard.xangnam.com
       - LISTEN_HOST=0.0.0.0
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
       - NODE_ENV=development
-      - LELYLAN_API_PUBLIC_URL=api-proxy
-      - LELYLAN_PEOPLE_PUBLIC_URL=people
-      - LELYLAN_CLIENT_ID=""
-      - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard
-      - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard
-      - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets
-      - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center
-      - LELYLAN_NODES_PUBLIC_URL=nodes
+      - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
+      - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
+      - LELYLAN_CLIENT_ID="55765567"
+      - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
+      - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
+      - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
+      - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center.xangnam.com
+      - LELYLAN_NODES_PUBLIC_URL=nodes.xangnam.com
   dev-center:
     image: lelylanlab/dev:latest
     restart: always
+    container_name: dev-center
     expose:
       - 80
     depends_on:
       - people
     environment:
-      - VIRTUAL_HOST=dev-center
+      - VIRTUAL_HOST=dev-center.xangnam.com
       - PORT=80
       - RACK_ENV=development
       - RAILS_ENV=development
@@ -458,6 +573,7 @@ services:
   mongodb:
     image: mongo:2.6
     restart: always
+    container_name: mongodb
     volumes_from:
       - mongodb-data
     expose:
@@ -465,6 +581,7 @@ services:
     command: mongod --smallfiles
   mongodb-data:
     image: mongo:2.6
+    container_name: mongodb-data
     volumes:
       - /data/db
       - /var/lib/mongodb
@@ -473,20 +590,23 @@ services:
   redis:
     image: redis:2.6
     restart: always
+    container_name: redis
     volumes_from:
       - redis-data
     expose:
       - 6379
   redis-data:
     image: redis:2.6
+    container_name: redis-data
     volumes:
       - /data
     entrypoint: /bin/true
   memcached:
     image: bitnami/memcached:latest
     restart: always
+    container_name: memcached
     expose:
       - 11211
     environment:
-      - MEMCACHED_USERNAME=user
-      - MEMCACHED_PASSWORD=password
+      - MEMCACHED_USERNAME=hex
+      - MEMCACHED_PASSWORD=ilovedocker555
