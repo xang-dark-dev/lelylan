@@ -513,9 +513,9 @@ services:
     image: mongo:2.6
     container_name: mongodb-data
     volumes:
-      - /data/db
-      - /var/lib/mongodb
-      - /var/log/mongodb
+      - /var/server-data/mongodb/data/db:/data/db
+      - /var/server-data/mongodb/lib/mongodb:/var/lib/mongodb
+      - /var/server-data/mongodb/log/mongodb:/var/log/mongodb
     entrypoint: /bin/true
   redis:
     image: redis:2.6
@@ -531,7 +531,7 @@ services:
     image: redis:2.6
     container_name: redis-data
     volumes:
-      - /data
+      - /var/server-data/redis/data:/data
     entrypoint: /bin/true
   memcached:
     image: bitnami/memcached:latest
