@@ -429,32 +429,32 @@ services:
       - "redis:redis"
       - "memcached:memcached"
   #: Development tools
-  # types-dashboard:
-  #   image: lelylanlab/types-dashboard-ng:latest
-  #   restart: always
-  #   container_name: type-dashboard
-  #   expose:
-  #     - 80
-  #   depends_on:
-  #     - api-proxy
-  #     - people
-  #     - websockets
-  #   environment:
-  #     - VIRTUAL_HOST=types-dashboard.xangnam.com
-  #     - PUBLIC_HOST=types-dashboard.xangnam.com
-  #     - LISTEN_HOST=0.0.0.0
-  #     - PORT=80
-  #     - RACK_ENV=development
-  #     - RAILS_ENV=development
-  #     - NODE_ENV=development
-  #     - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
-  #     - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
-  #     - LELYLAN_CLIENT_ID=""
-  #     - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
-  #     - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
-  #     - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
-  #     - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center.xangnam.com
-  #     - LELYLAN_NODES_PUBLIC_URL=nodes.xangnam.com
+  types-dashboard:
+    image: lelylanlab/types-dashboard-ng:latest
+    restart: always
+    container_name: type-dashboard
+    expose:
+      - 80
+    depends_on:
+      - api-proxy
+      - people
+      - websockets
+    environment:
+      - VIRTUAL_HOST=types-dashboard.xangnam.com
+      - PUBLIC_HOST=types-dashboard.xangnam.com
+      - LISTEN_HOST=0.0.0.0
+      - PORT=80
+      - RACK_ENV=development
+      - RAILS_ENV=development
+      - NODE_ENV=development
+      - LELYLAN_API_PUBLIC_URL=api-proxy.xangnam.com
+      - LELYLAN_PEOPLE_PUBLIC_URL=people.xangnam.com
+      - LELYLAN_CLIENT_ID=""
+      - LELYLAN_TYPES_DASHBOARD_PUBLIC_URL=types-dashboard.xangnam.com
+      - LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL=devices-dashboard.xangnam.com
+      - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
+      - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center.xangnam.com
+      - LELYLAN_NODES_PUBLIC_URL=nodes.xangnam.com
   devices-dashboard:
     image: lelylanlab/devices-dashboard-ng:latest
     container_name: devices-dashboard
@@ -481,6 +481,7 @@ services:
       - LELYLAN_WEBSOCKETS_PUBLIC_URL=websockets.xangnam.com
       - LELYLAN_DEV_CENTER_PUBLIC_URL=dev-center.xangnam.com
       - LELYLAN_NODES_PUBLIC_URL=nodes.xangnam.com
+    command: bash /usr/src/app/build.sh
   dev-center:
     image: lelylanlab/dev:latest
     restart: always
