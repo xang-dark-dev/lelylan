@@ -506,6 +506,8 @@ services:
       - mongodb-data
     expose:
       - 27017
+    depends_on:
+      - mongodb-data 
     command: mongod --smallfiles
   mongodb-data:
     image: mongo:2.6
@@ -523,6 +525,8 @@ services:
       - redis-data
     expose:
       - 6379
+    depends_on:
+      - mongodb-data   
   redis-data:
     image: redis:2.6
     container_name: redis-data
